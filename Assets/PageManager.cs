@@ -7,13 +7,20 @@ using UnityEngine;
 
 public class PageManager : MonoBehaviour
 {
-    private BookManager book;
+    public string lyricText;
+    public List<AudioClip> story = new List<AudioClip>();
     public int page;
+    public bool allowZoomIn = true;
+    public bool allowLyrics = true;
     public AudioClip backgroundMusic;
     public List<AudioClip> effectMusicList = new List<AudioClip>();
-    AudioSource background;
-    List<AudioSource> effectList = new List<AudioSource>();
 
+
+
+    private BookManager book;
+    private AudioSource background;
+    private AudioSource storyAudioSource;
+    private List<AudioSource> effectList = new List<AudioSource>();
     private CanvasScaler scaler;
     private RectTransform rectTransform;
 
@@ -37,6 +44,46 @@ public class PageManager : MonoBehaviour
     private Vector3 startLocalPosition = new Vector3(0, 0, 0);
     private float delta = 0;
 
+
+    public void toggleVoice()
+    {
+        book.toggleVoice();
+        if (story.Count <= book.languageIndex)
+        {
+            Debug.Log("No story defined for page " + page);
+            return;
+        }
+        AudioClip clip = story[book.languageIndex];
+        if (clip)
+        {
+            if (storyAudioSource.clip && storyAudioSource.clip != clip)
+            {
+                if (storyAudioSource.isPlaying)
+                {
+                    Debug.Log("Stoping story for page " + page);
+                    storyAudioSource.Stop();
+                }
+            }
+            storyAudioSource.clip = clip;
+            storyAudioSource.loop = false;
+            if (book.isVoicePlaying)
+            {
+                if (!storyAudioSource.isPlaying)
+                {
+                    Debug.Log("Playing story for page " + page);
+                    storyAudioSource.Play();
+                }
+            } else
+            {
+                if (storyAudioSource.isPlaying)
+                {
+                    Debug.Log("Stoping story for page " + page);
+                    storyAudioSource.Stop();
+                }
+            }
+        }
+        
+    }
 
     public void toggleEffects()
     {
@@ -81,6 +128,20 @@ public class PageManager : MonoBehaviour
             }
         }
     }
+
+    public void toggleLyrics()
+    {
+        book.toggleLyrics();
+        if (book.isLyrics)
+        {
+            // PJC TO DO show lyric panel
+        }
+        else
+        {
+            // PJC TO DO hide
+        }
+    }
+
     public void toggleZoom()
     {
         if (!zooming)
@@ -214,7 +275,11 @@ public class PageManager : MonoBehaviour
             }
             
         }
-        if (book.isZoomedIn)
+        book.showZoomControl = allowZoomIn;
+        if (book.isZoomedIn && !allowZoomIn)
+        {
+            instantZoomOut();
+        } else if (book.isZoomedIn)
         {
             instantZoomIn();
         } else
@@ -225,7 +290,8 @@ public class PageManager : MonoBehaviour
     void Awake()
     {
         Debug.Log("PAGE " + page + " start");
-        var canvasTransform = this.transform.parent;
+        storyAudioSource = gameObject.AddComponent<AudioSource>();
+        var canvasTransform = this.transform.parent.parent;
         book = canvasTransform.GetComponent<BookManager>();
         if (backgroundMusic)
         {
@@ -270,6 +336,7 @@ public class PageManager : MonoBehaviour
             currentScale = minScale;
         }
         this.rectTransform.localScale = new Vector3(currentScale, currentScale, 1);
+        book.registerPage(this);
     }
 
 

@@ -17,15 +17,17 @@ public class BookManager : MonoBehaviour
             {
                 return;
             }
+            _page = value;
+            Debug.Log("Setting page to " + _page.page);
             foreach (var p in pageList)
             {
                 p.StopPage();
-                p.gameObject.SetActive(false);                
+                p.transform.parent.gameObject.SetActive(false);                
             }
-            _page = value;
+            
             if (_page)
             {
-                _page.gameObject.SetActive(true);
+                _page.transform.parent.gameObject.SetActive(true);
                 _page.PlayPage();
             }
         }
@@ -37,17 +39,29 @@ public class BookManager : MonoBehaviour
             return page == cover;
         }
     }
+    public int languageIndex
+    {
+        get
+        {
+            return _languageIndex;
+        }
+    }
+    private int totalPages = 10 + 1;
+    private int _languageIndex = 0;
     private int pageNumber = -1;
-    private PageManager[] pageList;
+    private List<PageManager> pageList = new List<PageManager>();
     private PageManager cover;
     private Transform joyStick;
     private Transform zoomOut;
     private Transform zoomIn;
     private Transform musicOff;
     private Transform musicOn;
+    private Transform voiceOff;
+    private Transform voiceOn;
     private Transform effectsOff;
     private Transform effectsOn;
     private Transform home;
+    private Transform lyrics;
     private Transform playNextPage;
     private Transform playPrevPage;
 
@@ -82,6 +96,21 @@ public class BookManager : MonoBehaviour
             }
         }
     }
+    private bool _isVoicePlaying = true;
+    public bool isVoicePlaying
+    {
+        get
+        {
+            return _isVoicePlaying;
+        }
+        set
+        {
+            if (_isVoicePlaying != value)
+            {
+                toggleVoice();
+            }
+        }
+    }
     private bool _isEffectsOn = true;
     public bool isEffectsOn
     {
@@ -96,6 +125,34 @@ public class BookManager : MonoBehaviour
                 toggleEffects();
             }
         }
+    }
+
+    private bool _isLyrics = true;
+    public bool isLyrics
+    {
+        get
+        {
+            return _isLyrics;
+        }
+        set
+        {
+            if (_isLyrics != value)
+            {
+                toggleLyrics();
+            }
+        }
+    }
+    public void toggleLyrics()
+    {
+        _isLyrics = !_isLyrics;
+        lyrics.gameObject.SetActive(_isLyrics);
+    }
+
+    public void toggleVoice()
+    {
+        _isVoicePlaying = !_isVoicePlaying;
+        voiceOff.gameObject.SetActive(_isVoicePlaying);
+        voiceOn.gameObject.SetActive(!_isVoicePlaying);
     }
 
     public void toggleMusic()
@@ -146,6 +203,14 @@ public class BookManager : MonoBehaviour
         }
     }
 
+    public bool showLyricControl
+    {
+        set
+        {
+            lyrics.gameObject.SetActive(value);
+        }
+    }
+
     public bool showHomeControl
     {
         set
@@ -179,6 +244,7 @@ public class BookManager : MonoBehaviour
         playPrevPage = canvasTransform.Find("Prev");
         playNextPage = canvasTransform.Find("Next");
         home = canvasTransform.Find("Home");
+        lyrics = canvasTransform.Find("Lyrics");
         joyStick = canvasTransform.Find("Joystick");
         zoomOut = canvasTransform.Find("ZoomOut");
         zoomIn = canvasTransform.Find("ZoomIn");
@@ -186,11 +252,22 @@ public class BookManager : MonoBehaviour
         musicOff = canvasTransform.Find("MusicOff");
         musicOn = canvasTransform.Find("MusicOn");
 
+        voiceOff = canvasTransform.Find("VoiceOff");
+        voiceOn = canvasTransform.Find("VoiceOn");
+
         effectsOff = canvasTransform.Find("EffectsOff");
         effectsOn = canvasTransform.Find("EffectsOn");
 
-        pageList = this.gameObject.GetComponentsInChildren<PageManager>();
-        goHome();
+    }
+
+    public void registerPage(PageManager childPage)
+    {
+        pageList.Add(childPage);
+        Debug.Log("Registered page " + childPage.page);
+        if (pageList.Count == totalPages)
+        {
+            goHome();
+        }
     }
 
     public void goHome()
