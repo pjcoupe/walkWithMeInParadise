@@ -4,14 +4,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEngine.UI.Image;
 using UnityEngine;
+using TMPro;
 
 public class PageManager : MonoBehaviour
 {
-    public string lyricText;
+    public List<string> lyricText = new List<string>();
     public List<AudioClip> story = new List<AudioClip>();
     public int page;
     public bool allowZoomIn = true;
     public bool allowLyrics = true;
+    public bool allowVoice = true;
     public AudioClip backgroundMusic;
     public List<AudioClip> effectMusicList = new List<AudioClip>();
 
@@ -23,6 +25,10 @@ public class PageManager : MonoBehaviour
     private List<AudioSource> effectList = new List<AudioSource>();
     private CanvasScaler scaler;
     private RectTransform rectTransform;
+    private RectTransform topPanel;
+    private RectTransform bottomPanel;
+    
+    
 
     const float maxScale = 2f;
     const float minScale = 1.125f;
@@ -43,7 +49,8 @@ public class PageManager : MonoBehaviour
     private Vector3 endLocalPosition = new Vector3(0, 0, 0);
     private Vector3 startLocalPosition = new Vector3(0, 0, 0);
     private float delta = 0;
-
+    private TextMeshProUGUI textMeshPro;
+    
 
     public void toggleVoice()
     {
@@ -53,7 +60,13 @@ public class PageManager : MonoBehaviour
             Debug.Log("No story defined for page " + page);
             return;
         }
-        AudioClip clip = story[book.languageIndex];
+        checkToChangeStoryVoiceClipAndLanguageText();
+        
+    }
+
+    public void checkToChangeStoryVoiceClipAndLanguageText(float delay = 0f)
+    {
+        AudioClip clip = getStoryClip();
         if (clip)
         {
             if (storyAudioSource.clip && storyAudioSource.clip != clip)
@@ -66,14 +79,15 @@ public class PageManager : MonoBehaviour
             }
             storyAudioSource.clip = clip;
             storyAudioSource.loop = false;
-            if (book.isVoicePlaying)
+            if (book.isVoiceOn)
             {
                 if (!storyAudioSource.isPlaying)
                 {
                     Debug.Log("Playing story for page " + page);
-                    storyAudioSource.Play();
+                    storyAudioSource.PlayDelayed(delay);
                 }
-            } else
+            }
+            else
             {
                 if (storyAudioSource.isPlaying)
                 {
@@ -82,8 +96,21 @@ public class PageManager : MonoBehaviour
                 }
             }
         }
-        
+        if (textMeshPro && textMeshPro.text != getLyricText())
+        {
+            textMeshPro.text = getLyricText();
+        }
     }
+
+    public string getLyricText()
+    {
+        if (book.languageIndex >= 0 && book.languageIndex < lyricText.Count)
+        {
+            return lyricText[book.languageIndex];
+        }
+        return "";
+    }
+
 
     public void toggleEffects()
     {
@@ -114,14 +141,14 @@ public class PageManager : MonoBehaviour
         book.toggleMusic();
         if (book.isMusicOn)
         {
-            if (!background.isPlaying)
+            if (background && !background.isPlaying)
             {
                 Debug.Log("Playing background for page " + page);
                 background.Play();
             }
         } else
         {
-            if (background.isPlaying)
+            if (background && background.isPlaying)
             {
                 Debug.Log("Stopping background for page " + page);
                 background.Stop();
@@ -132,14 +159,7 @@ public class PageManager : MonoBehaviour
     public void toggleLyrics()
     {
         book.toggleLyrics();
-        if (book.isLyrics)
-        {
-            // PJC TO DO show lyric panel
-        }
-        else
-        {
-            // PJC TO DO hide
-        }
+        
     }
 
     public void toggleZoom()
@@ -247,6 +267,21 @@ public class PageManager : MonoBehaviour
                 effect.Stop();
             }
         }
+        if (storyAudioSource && storyAudioSource.isPlaying)
+        {
+            Debug.Log("Stopping voice story for page " + page);
+            storyAudioSource.Stop();
+        }
+        
+    }
+
+    public AudioClip getStoryClip()
+    {
+        if (book.languageIndex >=0 && book.languageIndex < story.Count)
+        {
+            return story[book.languageIndex];
+        }
+        return null;
     }
     public void PlayPage()
     {
@@ -273,8 +308,21 @@ public class PageManager : MonoBehaviour
                 Debug.Log("Stopping effect for page " + page);
                 effect.Stop();
             }
-            
         }
+        if (getStoryClip() && storyAudioSource)
+        {
+            if (book.isVoiceOn)
+            {
+                Debug.Log("Playing story for page " + page);
+                storyAudioSource.Play();
+            } else
+            {
+                Debug.Log("Stopping story for page " + page);
+                storyAudioSource.Stop();
+            }
+        }
+        book.showVoiceControl = allowVoice;
+        book.showLyricControl = allowLyrics;
         book.showZoomControl = allowZoomIn;
         if (book.isZoomedIn && !allowZoomIn)
         {
@@ -287,21 +335,52 @@ public class PageManager : MonoBehaviour
             instantZoomOut();
         }
     }
+
+    private RectTransform panelToUse;
+    private Vector2 onScreenPanelPos;
+    private Vector2 offScreenPanelPos;
+    
     void Awake()
     {
+        // note I got flags from https://www.countryflags.com/united-states-flag-icon/
+
         Debug.Log("PAGE " + page + " start");
+        Transform parent = transform.parent;
+        textMeshPro = parent.GetComponentInChildren<TextMeshProUGUI>();
+        Transform top = parent.Find("TopPanel");
+        if (top)
+        {
+            topPanel = top.GetComponent<RectTransform>();
+            onScreenPanelPos = new Vector2(topPanel.anchoredPosition.x, topPanel.anchoredPosition.y);
+            offScreenPanelPos = onScreenPanelPos + new Vector2(0, 500f);
+            panelToUse = topPanel;
+        }
+        else
+        {
+            Transform bottom = parent.Find("BottomPanel");
+            if (bottom)
+            {
+                bottomPanel = bottom.GetComponent<RectTransform>();
+                onScreenPanelPos = new Vector2(bottomPanel.anchoredPosition.x, bottomPanel.anchoredPosition.y);
+                offScreenPanelPos = onScreenPanelPos + new Vector2(0, -500f);
+                panelToUse = bottomPanel;
+            }
+        }
+
         storyAudioSource = gameObject.AddComponent<AudioSource>();
         var canvasTransform = this.transform.parent.parent;
         book = canvasTransform.GetComponent<BookManager>();
         if (backgroundMusic)
         {
+            book.showMusicControl = true;
             background = gameObject.AddComponent<AudioSource>();
             background.clip = backgroundMusic;
             background.loop = true;
             background.ignoreListenerVolume = true;
-
+        } else
+        {
+            book.showMusicControl = false;
         }
-
         foreach (AudioClip effect in effectMusicList)
         {
             AudioSource toPush = gameObject.AddComponent<AudioSource>();
@@ -310,7 +389,6 @@ public class PageManager : MonoBehaviour
             toPush.ignoreListenerVolume = true;
             effectList.Add(toPush);
         }
-        
         scaler = canvasTransform.GetComponent<CanvasScaler>();
         float width = Screen.width;
         float height = Screen.height;
@@ -328,8 +406,6 @@ public class PageManager : MonoBehaviour
         float lerp = Lerp(heightPreferred, widthPreferred, screenAspectRatio);
         this.scaler.matchWidthOrHeight = 1f - lerp;
         currentLocalPosition = zoomedInInitialTarget;
-
-        
         this.rectTransform = transform.GetComponent<RectTransform>();
         if (book.isCover)
         {
@@ -362,7 +438,19 @@ public class PageManager : MonoBehaviour
         }
         this.rectTransform.localPosition = currentLocalPosition;
         this.rectTransform.localScale = new Vector3(currentScale, currentScale, 1);
-
+        if (panelToUse)
+        {
+            if (book.currentPanelOnScreenLerp < book.targetPanelOnScreenLerp)
+            {
+                book.currentPanelOnScreenLerp = Mathf.Clamp01(book.currentPanelOnScreenLerp + book.panelMoveSpeed * 0.01f);
+            }
+            else if (book.currentPanelOnScreenLerp > book.targetPanelOnScreenLerp)
+            {
+                book.currentPanelOnScreenLerp = Mathf.Clamp01(book.currentPanelOnScreenLerp - book.panelMoveSpeed * 0.01f);
+            }
+            panelToUse.anchoredPosition = Vector2.Lerp(onScreenPanelPos, offScreenPanelPos, book.currentPanelOnScreenLerp);
+        }
+        
     }
 
 }

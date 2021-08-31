@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class BookManager : MonoBehaviour
 {
+    public float currentPanelOnScreenLerp = 0f;
+    public float targetPanelOnScreenLerp = 0f;
+    public float panelMoveSpeed = 3f;
+
     private PageManager _page;
     public PageManager page
     {
@@ -18,6 +25,7 @@ public class BookManager : MonoBehaviour
                 return;
             }
             _page = value;
+            currentPanelOnScreenLerp = targetPanelOnScreenLerp;
             Debug.Log("Setting page to " + _page.page);
             foreach (var p in pageList)
             {
@@ -45,7 +53,23 @@ public class BookManager : MonoBehaviour
         {
             return _languageIndex;
         }
+        
     }
+    public void setLanguage(int index, AudioClip welcomeClip)
+    {
+        if (this.languageIndex != index)
+        {
+            
+            this._languageIndex = index;
+            if (welcomeClip)
+            {
+                audioSource.PlayOneShot(welcomeClip);
+            }
+            page.checkToChangeStoryVoiceClipAndLanguageText(1f);
+        }
+    }
+    private AudioSource audioSource;
+
     private int totalPages = 10 + 1;
     private int _languageIndex = 0;
     private int pageNumber = -1;
@@ -64,6 +88,7 @@ public class BookManager : MonoBehaviour
     private Transform lyrics;
     private Transform playNextPage;
     private Transform playPrevPage;
+    
 
     private bool _isZoomedIn = true;
     public bool isZoomedIn
@@ -97,7 +122,7 @@ public class BookManager : MonoBehaviour
         }
     }
     private bool _isVoicePlaying = true;
-    public bool isVoicePlaying
+    public bool isVoiceOn
     {
         get
         {
@@ -142,10 +167,19 @@ public class BookManager : MonoBehaviour
             }
         }
     }
+
+    
     public void toggleLyrics()
     {
+
         _isLyrics = !_isLyrics;
-        lyrics.gameObject.SetActive(_isLyrics);
+        
+        Image image = lyrics.GetComponent<Image>();
+        if (image)
+        {
+            image.color = _isLyrics ? Color.white : Color.yellow;
+        }
+        targetPanelOnScreenLerp = Mathf.Clamp01(1f - targetPanelOnScreenLerp);
     }
 
     public void toggleVoice()
@@ -203,6 +237,15 @@ public class BookManager : MonoBehaviour
         }
     }
 
+    public bool showVoiceControl
+    {
+        set
+        {
+            voiceOff.gameObject.SetActive(value && isVoiceOn);
+            voiceOn.gameObject.SetActive(value && !isVoiceOn);
+        }
+    }
+
     public bool showLyricControl
     {
         set
@@ -240,6 +283,9 @@ public class BookManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        
+        
         var canvasTransform = this.transform;
         playPrevPage = canvasTransform.Find("Prev");
         playNextPage = canvasTransform.Find("Next");
@@ -310,13 +356,14 @@ public class BookManager : MonoBehaviour
             page = cover;
         }
         pageNumber = page.page;
-        
         showZoomControl = !isCover;
-        showMusicControl = true;
-        showEffectsControl = true;
+        showMusicControl = page.backgroundMusic;
+        showEffectsControl = page.effectMusicList.Count > 0;
         showHomeControl = !isCover;
+        showVoiceControl = page.getStoryClip();
         showPlayPrevPageControl = !isCover;
         showPlayNextPageControl = true;
+        page.checkToChangeStoryVoiceClipAndLanguageText();
     }
 
     

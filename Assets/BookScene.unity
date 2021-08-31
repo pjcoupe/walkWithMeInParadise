@@ -160,6 +160,141 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &196848895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 196848896}
+  - component: {fileID: 196848900}
+  - component: {fileID: 196848899}
+  - component: {fileID: 196848898}
+  - component: {fileID: 196848897}
+  m_Layer: 6
+  m_Name: English
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &196848896
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196848895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 459267760}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 75, y: -360}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &196848897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196848895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a8f2b9f020d45069575b0f9c30e59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageIndex: 0
+  welcomeToMyLanguage: {fileID: 0}
+--- !u!114 &196848898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196848895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.96941197, b: 0, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 196848899}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &196848899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196848895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2125ece2fadfd4347b95c8b503571209, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 1
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &196848900
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196848895}
+  m_CullTransparentMesh: 1
 --- !u!1 &209173278
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,11 +761,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - The river flows from My throne of grace,<br>for every creature, nation and race.<br><br>The
+    leaves give strength, energy and healing,<br>while the fruits are refreshing
+    and filling.
+  - "El r\xEDo fluye desde mi trono de gracia, Para cada criatura, naci\xF3n y raza.
+    Las hojas dan fuerza, energ\xEDa y sanaci\xF3n, mientras que los frutos son refrescos
+    y abundantes."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 4
   allowZoomIn: 1
   allowLyrics: 1
+  allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 7be849affc95e4a618f7459639d1a89f, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: aebee5363ce5144a09099769d6392ae8, type: 3}
@@ -941,6 +1085,8 @@ RectTransform:
   - {fileID: 1397737656}
   - {fileID: 833039290}
   - {fileID: 1834553498}
+  - {fileID: 196848896}
+  - {fileID: 1071643216}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -969,6 +1115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c961e31bb9154bae9115331701fa0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPanelOnScreenLerp: 0
+  targetPanelOnScreenLerp: 0
+  panelMoveSpeed: 3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,9 +1410,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "This is the city that We love for you to see, \nthe people here are all
-    a part of Me.\n\nTo live here you need to be faithful, gentle and kind \nto all
-    My creatures and to all mankind."
+  m_text: This is the city that We love for you to see,<br>the people here are all
+    a part of Me.<br><br>To live here you need to be faithful, gentle and kind<br>to
+    all My creatures and to all mankind.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1757,9 +1906,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Come fellowship with Us as We walk along the lake,\nlet\u2019s talk about
-    your day from the time you awake.\n\nTell Me your desires, plans and dreams,\nand
-    be surrounded by Our Love, Joy and Peace."
+  m_text: "Come fellowship with Us as We walk along the lake,<br>let\u2019s talk
+    about your day from the time you awake.<br><br>Tell Me your desires, plans and
+    dreams,<br>and be surrounded by Our Love, Joy and Peace."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1893,14 +2042,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Come ride with me on an adventure we will take.
-
-    We will soar through
-    the Heavens and glide over lakes, eat lots of fruit and drink sweet water.
-
-
-    Then
-    race through the Heavens and rest on a flower.'
+  m_text: Come ride with me on an adventure we will take.<br>We will soar through
+    the Heavens and glide over lakes, eat lots of fruit and drink sweet water.<br><br>Then
+    race through the Heavens and rest on a flower.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2027,14 +2171,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
+  lyricText: []
   story: []
   page: 0
-  allowZoomIn: 1
-  allowLyrics: 1
-  backgroundMusic: {fileID: 8300000, guid: 124ba37a6af4545ae94892e1fa69e14e, type: 3}
+  allowZoomIn: 0
+  allowLyrics: 0
+  allowVoice: 1
+  backgroundMusic: {fileID: 0}
   effectMusicList:
-  - {fileID: 8300000, guid: 5f55a16523a4c4af2b99a1b9f051c00c, type: 3}
+  - {fileID: 0}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
 --- !u!114 &735950285
 MonoBehaviour:
@@ -2342,11 +2487,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - Come ride with me on an adventure we will take.<br>We will soar through the Heavens
+    and glide over lakes, eat lots of fruit and drink sweet water.<br><br>Then race
+    through the Heavens and rest on a flower.
+  - "Ven a viajar conmigo en una aventura qui tomaremos. Volaremos por los cielos
+    y\_deslizaremos sobre lagos, comeremos mucha fruta y beberemos aqua dulce. Luego
+    correr por los cielos\_ y descansar en una flor."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 9
   allowZoomIn: 1
   allowLyrics: 1
+  allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 6dc2400bc227e4717b682d75235f0bf7, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: 08d9c639c7806483e80ca3d6b060eef7, type: 3}
@@ -2567,11 +2721,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - Welcome to my world of ice and snow,<br>here is a secret you did not know.<br><br>If
+    snowmen you make and angels too,<br>you will soon find out it's not cold to you.
+  - "Bienvenidos a mi mundo de hielo y nieve, Aqu\xED hay un secreto que no sabras.
+    Si haces mu\xF1ecos de nieve y \xC1ngeles tambi\xE9n, Pronto descubrir\xE1s que
+    no hace fr\xEDo para ti"
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 1
   allowZoomIn: 1
   allowLyrics: 1
+  allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 124ba37a6af4545ae94892e1fa69e14e, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: 5f55a16523a4c4af2b99a1b9f051c00c, type: 3}
@@ -2899,9 +3061,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Listen and watch the tinkle of bells,\nfrom the beautiful flowers and
-    trees as well.\n\nEach unique in its song of praise,\nthat flows in colour to
-    The Lord\u2019s throne of grace."
+  m_text: "Listen and watch the tinkle of bells,<br>from the beautiful flowers and
+    trees as well.<br><br>Each unique in its song of praise,<br>that flows in colour
+    to The Lord\u2019s throne of grace."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3035,16 +3197,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The river flows from My throne of grace,
-
-    for every creature, nation
-    and race.
-
-
-    The leaves give strength, energy and healing,
-
-    while the
-    fruits are refreshing and filling.'
+  m_text: The river flows from My throne of grace,<br>for every creature, nation
+    and race.<br><br>The leaves give strength, energy and healing,<br>while the fruits
+    are refreshing and filling.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3171,11 +3326,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - You can rocket through the waterfall or stand on a bridge,<br>dive into the river
+    or fly off a ridge.<br><br>Heaven is filled with so much fun,<br>created with
+    love for everyone.
+  - "Puedes atravesar una cascada o pararte en un puente Sum\xE9rgete en el rio o
+    vuela desde una cresta. El cielo est\xE1 lleno de mucha diversi\xF3n, creado
+    con amor para todos."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 3
   allowZoomIn: 1
   allowLyrics: 1
+  allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 7be849affc95e4a618f7459639d1a89f, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: c9a95349834b3436693c14085d6c95bd, type: 3}
@@ -3217,6 +3381,141 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065772706}
+  m_CullTransparentMesh: 1
+--- !u!1 &1071643215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1071643216}
+  - component: {fileID: 1071643220}
+  - component: {fileID: 1071643219}
+  - component: {fileID: 1071643218}
+  - component: {fileID: 1071643217}
+  m_Layer: 6
+  m_Name: Spanish
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &1071643216
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071643215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 459267760}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 75, y: -440}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1071643217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071643215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a8f2b9f020d45069575b0f9c30e59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageIndex: 1
+  welcomeToMyLanguage: {fileID: 0}
+--- !u!114 &1071643218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071643215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.96941197, b: 0, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1071643219}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1071643219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071643215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 56228f360cec84870b6fe506f7aece8c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 1
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1071643220
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071643215}
   m_CullTransparentMesh: 1
 --- !u!1 &1094274785
 GameObject:
@@ -3401,12 +3700,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - "Listen and watch the tinkle of bells,<br>from the beautiful flowers and trees
+    as well.<br><br>Each unique in its song of praise,<br>that flows in colour to
+    The Lord\u2019s throne of grace."
+  - "Escuchar y ver el tintineo de las campanas, de las hermosas flores  y \xE1rboles
+    tambi\xE9n.\_ Cada uno \xFAnico en su canci\xF3n de alabanza, que fluye en color
+    al trono del Se\xF1or de la gracia."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 6
   allowZoomIn: 1
   allowLyrics: 1
-  backgroundMusic: {fileID: 8300000, guid: a3e94d17aca934636b5ea38f51795263, type: 3}
+  allowVoice: 1
+  backgroundMusic: {fileID: 8300000, guid: 805124092624847dc969be13d6e02f6e, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: 799559254837643d691e5bf52c12097c, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
@@ -3611,11 +3919,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - Hi, I'm Torrah, I live in the sea.<br>You can breathe under water and have a
+    picnic with me.<br><br>Come meet new fish and visit right under,<br>you'll be
+    amazed as you look around in wonder.
+  - "Hola, soy Torrah, vivo en el mar. Puede respirar bajo el agua Y hacer un picnic
+    conmigo. Ven a conocer nuevos peces y visita justo abajo, Te sorprender\xE1s
+    mientras miras a tu alrededor en maravilla."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 5
   allowZoomIn: 1
   allowLyrics: 1
+  allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 7be849affc95e4a618f7459639d1a89f, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: 0d8bba19382054e84841ce3a9c710e0e, type: 3}
@@ -3708,11 +4025,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - "Come fellowship with Us as We walk along the lake,<br>let\u2019s talk about
+    your day from the time you awake.<br><br>Tell Me your desires, plans and dreams,<br>and
+    be surrounded by Our Love, Joy and Peace."
+  - "Ven comuni\xF3n con nosotras mientras caminamos por el lago, Hablemos de tu
+    d\xEDa desde el momento en que despiertas.\_ Cu\xE9ntame tus deseos, planes y
+    sue\xF1os,\_ y estar rodeado de nuestro amor, alegr\xEDa y paz."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 8
   allowZoomIn: 1
   allowLyrics: 1
+  allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 6dc2400bc227e4717b682d75235f0bf7, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: d606048dee24640d48d78a1eca238684, type: 3}
@@ -4012,11 +4338,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - This is the city that We love for you to see,<br>the people here are all a part
+    of Me.<br><br>To live here you need to be faithful, gentle and kind<br>to all
+    My creatures and to all mankind.
+  - "Esta es la ciudad que nos encanta que veas, la gente aqu\xED es parte de M\xED.
+    Para vivir aqu\xED tienes que ser fiel, gentil y amable,  a todas mis criaturas
+    y a toda la humanidad."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 7
   allowZoomIn: 1
   allowLyrics: 1
+  allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 7be849affc95e4a618f7459639d1a89f, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: 1db0576fd82354beaa204d51c29b63ca, type: 3}
@@ -4394,11 +4729,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - Gather around while I tell you a story,<br>of our God, His love, His Kingdom
+    and Glory.<br><br>His love is perfect, lovely and true,<br>and His Kingdom belongs
+    to such as you.
+  - "Re\xFAnanse mientras les cuento una history, de nuestro Dios, su amor, su reino
+    y Gloria. Su amor es perfecto, Hermoso y verdadero, y su reino pertenece a ustedes."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 2
   allowZoomIn: 1
   allowLyrics: 1
+  allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 7be849affc95e4a618f7459639d1a89f, type: 3}
   effectMusicList:
   - {fileID: 8300000, guid: e6d010ba59b2942f89f254804b0ca186, type: 3}
@@ -4922,9 +5265,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -5039,16 +5382,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hi, I''m Torrah, I live in the sea.
-
-    You can breathe under water and
-    have a picnic with me.
-
-
-    Come meet new fish and visit right under,
-
-    you''ll
-    be amazed as you look around in wonder.'
+  m_text: Hi, I'm Torrah, I live in the sea.<br>You can breathe under water and have
+    a picnic with me.<br><br>Come meet new fish and visit right under,<br>you'll
+    be amazed as you look around in wonder.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5175,12 +5511,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acac8a6148e4020a85e0883ea8c04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricText: 
-  story: []
+  lyricText:
+  - I love you my child, I love you I do,<br>and all through your life I will be
+    there with you.<br><br>Though troubles may come and disappointments too,<br>I
+    love you my child and will carry you through.
+  - "Te amo, hijo m\xEDo, te amo, lo hago, y durante toda tu vida all\xED estar\xE9
+    contigo, Aunque los problemas pueden venir y decepciones tambi\xE9n, Te amo,
+    hijo m\xEDo, y te llevar\xE9 adelante."
+  story:
+  - {fileID: 0}
+  - {fileID: 0}
   page: 10
   allowZoomIn: 1
   allowLyrics: 1
-  backgroundMusic: {fileID: 8300000, guid: 112b3cacb396e4103b27c0ae1594aaac, type: 3}
+  allowVoice: 1
+  backgroundMusic: {fileID: 8300000, guid: c1f0f08f434814a5b863c5b27de5a5de, type: 3}
   effectMusicList:
   - {fileID: 0}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
@@ -5488,9 +5833,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I love you my child, I love you I do, \nand all through your life I will
-    be there with you.\n \nThough troubles may come and disappointments too,\nI love
-    you my child and will carry you through."
+  m_text: I love you my child, I love you I do,<br>and all through your life I will
+    be there with you.<br><br>Though troubles may come and disappointments too,<br>I
+    love you my child and will carry you through.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
