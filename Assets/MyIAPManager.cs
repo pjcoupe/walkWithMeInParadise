@@ -21,6 +21,7 @@ public class MyIAPManager : IStoreListener
 
     public void PurchaseBook()
     {
+        Debug.LogWarning("Purchasing book...");
         // If Purchasing has been initialized ...
         if (controller != null && extensions != null)
         {
@@ -54,6 +55,7 @@ public class MyIAPManager : IStoreListener
     /// </summary>
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
+        Debug.LogWarning("IAP Initialised");
         this.controller = controller;
         this.extensions = extensions;
     }
@@ -66,6 +68,7 @@ public class MyIAPManager : IStoreListener
     /// </summary>
     public void OnInitializeFailed(InitializationFailureReason error)
     {
+        Debug.LogWarning("IAP Initialise FAILURE "+error);
     }
 
     /// <summary>
@@ -75,6 +78,7 @@ public class MyIAPManager : IStoreListener
     /// </summary>
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e)
     {
+        Debug.LogWarning("Purchase Processed Book Unlocked");
         PlayerPrefs.SetString("Unlocked", SystemInfo.deviceUniqueIdentifier);
         return PurchaseProcessingResult.Complete;
     }
@@ -115,6 +119,7 @@ public class MyIAPManager : IStoreListener
                 reason = "Unknown reason reported";
                 break;
         }
-        new PaperPlaneTools.Alert(title, reason);
+        Alert a = new PaperPlaneTools.Alert(title, reason);
+        a.Show();
     }
 }

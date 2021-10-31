@@ -19,6 +19,10 @@ public class BookManager : MonoBehaviour, IStoreListener
     public AudioSource storyAudioSource;
     private AudioSource click;
 
+    public void playClick()
+    {
+        click.Play();
+    }
     
     [SerializeField] bool _enablePerPlacementMode = true;
     private string _gameId;
