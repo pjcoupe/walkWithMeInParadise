@@ -8,7 +8,7 @@ public class ZoomToggle : MonoBehaviour
     
     private Button button;
     private BookManager bookManager;
-
+       
     // Start is called before the first frame update
     void Awake()
     {

@@ -1,13 +1,38 @@
 {
-    "m_SelectedDeviceId": "",
+    "m_SelectedDeviceId": "MN99GIEEN7CA8PEA",
     "m_SelectedPackage": {
         "deviceId": "",
         "name": "",
         "processId": 0,
         "exited": false
     },
-    "m_SelectedPriority": 0,
-    "m_KnownPackagesForSerialization": [],
+    "m_SelectedPriority": 4,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "MN99GIEEN7CA8PEA",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 2394,
+            "exited": true
+        },
+        {
+            "deviceId": "MN99GIEEN7CA8PEA",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 7055,
+            "exited": true
+        },
+        {
+            "deviceId": "MN99GIEEN7CA8PEA",
+            "name": "com.oppo.launcher",
+            "processId": 3233,
+            "exited": false
+        },
+        {
+            "deviceId": "MN99GIEEN7CA8PEA",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 24586,
+            "exited": false
+        }
+    ],
     "m_Tags": {
         "m_Entries": [
             {
@@ -41,9 +66,20 @@
         ]
     },
     "m_MemoryViewerState": {
-        "MemoryWindowHeight": 0.0,
-        "MemoryWindowWidth": 0.0,
-        "MemoryTypeEnabled": [],
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
         "MemoryGroup": 2,
         "Behavior": 0
     },

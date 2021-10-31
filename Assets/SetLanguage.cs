@@ -12,23 +12,28 @@ public class SetLanguage : MonoBehaviour
     public AudioClip welcomeToMyLanguage;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         bookManager = transform.parent.gameObject.GetComponentInChildren<BookManager>();
         button = transform.gameObject.GetComponent<Button>();
         button.onClick.AddListener(() =>
         {
-            bookManager.setLanguage(languageIndex, welcomeToMyLanguage);
+            bookManager.setLanguage(languageIndex, welcomeToMyLanguage, gameObject.name);
+            button.Select();
+            
         });
+        if (bookManager.languageIndex == languageIndex)
+        {
+            button.Select();
+        }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (bookManager.languageIndex == languageIndex)
         {
             button.Select();
-        }    
+        }
     }
-
 
 }

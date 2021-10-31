@@ -9,20 +9,24 @@ using TMPro;
 public class PageManager : MonoBehaviour
 {
     public List<string> lyricText = new List<string>();
-    public List<AudioClip> story = new List<AudioClip>();
+    private AudioClip story;
     public int page;
     public bool allowZoomIn = true;
     public bool allowLyrics = true;
     public bool allowVoice = true;
     public AudioClip backgroundMusic;
-    public List<AudioClip> effectMusicList = new List<AudioClip>();
 
 
 
     private BookManager book;
     private AudioSource background;
-    private AudioSource storyAudioSource;
-    private List<AudioSource> effectList = new List<AudioSource>();
+    private AudioSource storyAudioSource
+    {
+        get
+        {
+            return book.storyAudioSource;
+        }
+    }
     private CanvasScaler scaler;
     private RectTransform rectTransform;
     private RectTransform topPanel;
@@ -42,7 +46,7 @@ public class PageManager : MonoBehaviour
     
 
     // zoom related
-    private float currentScale = maxScale;
+    private float currentScale = minScale;
 
     public Vector3 zoomedInInitialTarget = new Vector3(600, 318, 0);
     private Vector3 currentLocalPosition;
@@ -55,47 +59,35 @@ public class PageManager : MonoBehaviour
     public void toggleVoice()
     {
         book.toggleVoice();
-        if (story.Count <= book.languageIndex)
-        {
-            Debug.Log("No story defined for page " + page);
-            return;
-        }
         checkToChangeStoryVoiceClipAndLanguageText();
-        
     }
 
-    public void checkToChangeStoryVoiceClipAndLanguageText(float delay = 0f)
+
+
+    public async void checkToChangeStoryVoiceClipAndLanguageText()
     {
         AudioClip clip = getStoryClip();
-        if (clip)
+        if (!book.isVoiceOn)
         {
-            if (storyAudioSource.clip && storyAudioSource.clip != clip)
-            {
-                if (storyAudioSource.isPlaying)
-                {
-                    Debug.Log("Stoping story for page " + page);
-                    storyAudioSource.Stop();
-                }
-            }
-            storyAudioSource.clip = clip;
-            storyAudioSource.loop = false;
-            if (book.isVoiceOn)
-            {
-                if (!storyAudioSource.isPlaying)
-                {
-                    Debug.Log("Playing story for page " + page);
-                    storyAudioSource.PlayDelayed(delay);
-                }
-            }
-            else
-            {
-                if (storyAudioSource.isPlaying)
-                {
-                    Debug.Log("Stoping story for page " + page);
-                    storyAudioSource.Stop();
-                }
-            }
+            clip = null;
         }
+        if (clip != storyAudioSource.clip)
+        {
+            Debug.Log("check1 " + (clip ? clip.name : "null"));
+            await book.FadeAndPlayNext(storyAudioSource, clip); //StartCoroutine(book.FadeAndPlayNext(storyAudioSource, clip));
+        } else
+        {
+            if (!storyAudioSource.isPlaying && book.isVoiceOn)
+            {
+                Debug.Log("check2 " + (clip ? clip.name : "null"));
+                await book.FadeAndPlayNext(storyAudioSource, clip); //StartCoroutine(book.FadeAndPlayNext(storyAudioSource, clip));
+            } else
+            {
+                Debug.Log("checkToChangeStoryVoice is same as audio " + (clip ? "has clip" : "null"));
+            }
+            
+        }
+        
         if (textMeshPro && textMeshPro.text != getLyricText())
         {
             textMeshPro.text = getLyricText();
@@ -112,29 +104,7 @@ public class PageManager : MonoBehaviour
     }
 
 
-    public void toggleEffects()
-    {
-        book.toggleEffects();
-        foreach (AudioSource effect in effectList)
-        {
-            if (book.isEffectsOn)
-            {
-                if (!effect.isPlaying)
-                {
-                    Debug.Log("Playing effect for page " + page);
-                    effect.Play();
-                }
-            }
-            else
-            {
-                if (effect.isPlaying)
-                {
-                    Debug.Log("Stopping effects for page " + page);
-                    effect.Stop();
-                }
-            }
-        }
-    }
+
 
     public void toggleMusic()
     {
@@ -252,36 +222,39 @@ public class PageManager : MonoBehaviour
         return (current - min) / (max - min);
     }
 
-    public void StopPage()
+    public async void StopPage()
     {
         if (background && background.isPlaying)
         {
-            Debug.Log("Stopping background for page " + page);
+            //Debug.Log("Stopping background for page " + page);
             background.Stop();
         }
-        foreach (AudioSource effect in effectList)
+
+        if (storyAudioSource && storyAudioSource.isPlaying && storyAudioSource.clip == story)
         {
-            if (effect.isPlaying)
-            {
-                Debug.Log("Stopping effect for page " + page);
-                effect.Stop();
-            }
-        }
-        if (storyAudioSource && storyAudioSource.isPlaying)
-        {
-            Debug.Log("Stopping voice story for page " + page);
-            storyAudioSource.Stop();
+            Debug.Log("check3 " + (storyAudioSource.clip ? storyAudioSource.clip.name : "null"));
+            await book.FadeAndPlayNext(storyAudioSource, null); // StartCoroutine(book.FadeAndPlayNext(storyAudioSource, null));
         }
         
     }
 
+    public void unloadStoryClip()
+    {
+        if (story)
+        {
+            Resources.UnloadAsset(story);
+            story = null;
+        }
+    }
     public AudioClip getStoryClip()
     {
-        if (book.languageIndex >=0 && book.languageIndex < story.Count)
+        string path = "voice/" + book.languageName + "/Page" + page;
+        story = Resources.Load(path) as AudioClip;
+        if (!story)
         {
-            return story[book.languageIndex];
+            Debug.Log("Failed to get story " + path);
         }
-        return null;
+        return story;
     }
     public void PlayPage()
     {
@@ -297,30 +270,8 @@ public class PageManager : MonoBehaviour
                 background.Stop();
             }
         }
-        foreach (AudioSource effect in effectList)
-        {
-            if (book.isEffectsOn)
-            {
-                Debug.Log("Playing effect for page " + page);
-                effect.Play();
-            } else
-            {
-                Debug.Log("Stopping effect for page " + page);
-                effect.Stop();
-            }
-        }
-        if (getStoryClip() && storyAudioSource)
-        {
-            if (book.isVoiceOn)
-            {
-                Debug.Log("Playing story for page " + page);
-                storyAudioSource.Play();
-            } else
-            {
-                Debug.Log("Stopping story for page " + page);
-                storyAudioSource.Stop();
-            }
-        }
+        checkToChangeStoryVoiceClipAndLanguageText();
+
         book.showVoiceControl = allowVoice;
         book.showLyricControl = allowLyrics;
         book.showZoomControl = allowZoomIn;
@@ -344,7 +295,7 @@ public class PageManager : MonoBehaviour
     {
         // note I got flags from https://www.countryflags.com/united-states-flag-icon/
 
-        Debug.Log("PAGE " + page + " start");
+        //Debug.Log("PAGE " + page + " start");
         Transform parent = transform.parent;
         textMeshPro = parent.GetComponentInChildren<TextMeshProUGUI>();
         Transform top = parent.Find("TopPanel");
@@ -367,7 +318,7 @@ public class PageManager : MonoBehaviour
             }
         }
 
-        storyAudioSource = gameObject.AddComponent<AudioSource>();
+        
         var canvasTransform = this.transform.parent.parent;
         book = canvasTransform.GetComponent<BookManager>();
         if (backgroundMusic)
@@ -381,14 +332,7 @@ public class PageManager : MonoBehaviour
         {
             book.showMusicControl = false;
         }
-        foreach (AudioClip effect in effectMusicList)
-        {
-            AudioSource toPush = gameObject.AddComponent<AudioSource>();
-            toPush.clip = effect;
-            toPush.loop = true;
-            toPush.ignoreListenerVolume = true;
-            effectList.Add(toPush);
-        }
+
         scaler = canvasTransform.GetComponent<CanvasScaler>();
         float width = Screen.width;
         float height = Screen.height;
@@ -403,8 +347,8 @@ public class PageManager : MonoBehaviour
         {
             screenAspectRatio = heightPreferred;
         }
-        float lerp = Lerp(heightPreferred, widthPreferred, screenAspectRatio);
-        this.scaler.matchWidthOrHeight = 1f - lerp;
+        
+        this.scaler.matchWidthOrHeight = 1f;
         currentLocalPosition = zoomedInInitialTarget;
         this.rectTransform = transform.GetComponent<RectTransform>();
         if (book.isCover)
@@ -419,6 +363,7 @@ public class PageManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Debug.Log("Screen " + Screen.currentResolution);
         var gamepad = Gamepad.current;
 
         if (gamepad != null && !zooming)
@@ -453,4 +398,5 @@ public class PageManager : MonoBehaviour
         
     }
 
+ 
 }

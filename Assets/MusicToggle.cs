@@ -17,7 +17,7 @@ public class MusicToggle : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             bookManager.page.toggleMusic();
-        });
+        });   
     }
 
 
