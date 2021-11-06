@@ -27,8 +27,145 @@ public class BookManager : MonoBehaviour, IStoreListener
     [SerializeField] bool _enablePerPlacementMode = true;
     private string _gameId;
 
+    private Vector3 startPosition = Vector3.zero;
+    private Vector3 endPosition = Vector3.zero;
 
+    private const double maxSwipeTime = 0.67;
+    private double? gestureStartTime = null;
+    private double? gestureTotalTime = null;
+    void Update()
+    {
+        bool gestureEnded = false;
+        Vector3 mousePosition = Input.mousePosition;
+        if (gestureStartTime == null && Input.GetMouseButtonDown(0))    // swipe begins
+        {
+            startPosition = Camera.main.ScreenToViewportPoint(mousePosition);
+            gestureStartTime = Time.realtimeSinceStartupAsDouble;
+        }
+        if (gestureStartTime != null)
+        {
+            gestureTotalTime = Time.realtimeSinceStartupAsDouble - gestureStartTime;
+        }
+        if (gestureStartTime != null && Input.GetMouseButtonUp(0))    // swipe ends
+        {
+            endPosition = Camera.main.ScreenToViewportPoint(mousePosition);                        
+            gestureStartTime = null;
+            gestureEnded = true;
+        }
+        if (gestureEnded)
+        {
+            if (gestureTotalTime != null && gestureTotalTime < maxSwipeTime)
+            {
+                doSwipe();
+            }
+            gestureTotalTime = null;
+            startPosition = endPosition = Vector3.zero;
+            if (page && page.page > 0)
+            {
+                page.instantZoomOut();
+            }
+        }
+        else if (gestureTotalTime != null && gestureTotalTime > maxSwipeTime)
+        {
+            doHeld(mousePosition);
+        }
+    }
 
+    private void doHeld(Vector3 mousePosition)
+    {
+        if (page && page.page > 0)
+        {
+            /*
+             * private Vector3 bottomLeft = new Vector3(960f * (maxScale - 1f), 418f * (maxScale - 1f), 1f); // was 540
+    private Vector3 topRight = new Vector3(-960f * (maxScale - 1f), -418f * (maxScale - 1f), 1f);
+             */
+            Vector3 vpPosition = Camera.main.ScreenToViewportPoint(mousePosition);
+            float x = (0.5f - vpPosition.x) * (2f * PageManager.xBoundary);
+            float y = (0.5f - vpPosition.y) * (2f * PageManager.yBoundary);
+            page.zoomedInInitialTarget = new Vector3(x * (PageManager.maxScale - 1f), y * (PageManager.maxScale - 1f), 0);
+            Debug.Log("start x " + x + " y " + y + " zoom " + page.zoomedInInitialTarget);
+            page.instantZoomIn();
+
+        }
+    }
+
+    private void doSwipe()
+    {
+        if (startPosition != endPosition && startPosition != Vector3.zero && endPosition != Vector3.zero)
+        {
+            float deltaX = Mathf.Abs(endPosition.x - startPosition.x);
+            float deltaY = Mathf.Abs(endPosition.y - startPosition.y);
+            if (deltaX < .05f || deltaY > deltaX)
+            {
+                deltaX = 0;
+            }
+            if (deltaY < .05f || deltaX > deltaY)
+            {
+                deltaY = 0;
+            }
+            // ignore diagonal
+            if (deltaX > 0 || deltaY > 0)
+            {
+                if (deltaX > 0)
+                {
+                    if (startPosition.x < endPosition.x) // swipe LTR
+                    {
+                        if (showPlayPrevPageControl)
+                        {
+                            movePrevious();
+                        }
+                    }
+                    else // swipe RTL
+                    {
+                        if (showPlayNextPageControl)
+                        {
+                            if (iap.gameObject.activeSelf)
+                            {
+                                purchaseBook();
+                            }
+                            else
+                            {
+                                moveNext();
+                            }
+
+                        }
+                    }
+                }
+                else if (deltaY > 0)
+                {
+                    if (showLyricControl)
+                    {
+                        if (startPosition.y < endPosition.y)
+                        {
+                            // bottom to top
+                            if (page.hasTopPanel && isLyrics)
+                            {
+                                toggleLyrics();
+                            }
+                            else if (page.hasBottomPanel && !isLyrics)
+                            {
+                                toggleLyrics();
+                            }
+                        }
+                        else
+                        {
+                            // top to bottom
+                            if (page.hasTopPanel && !isLyrics)
+                            {
+                                toggleLyrics();
+                            }
+                            else if (page.hasBottomPanel && isLyrics)
+                            {
+                                toggleLyrics();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+
+    }
 
     private bool allowedToMoveToNextPage(int proposedPage)
     {
@@ -50,7 +187,7 @@ public class BookManager : MonoBehaviour, IStoreListener
             }
             _page = value;
             currentPanelOnScreenLerp = targetPanelOnScreenLerp;
-            Debug.Log("Setting page to " + _page.page);
+            //Debug.Log("Setting page to " + _page.page);
             foreach (var p in pageList)
             {
                 p.StopPage();
@@ -246,6 +383,10 @@ public class BookManager : MonoBehaviour, IStoreListener
 
     public bool showLyricControl
     {
+        get
+        {
+            return lyrics.gameObject.activeSelf;
+        }
         set
         {
             lyrics.gameObject.SetActive(value);
@@ -262,6 +403,10 @@ public class BookManager : MonoBehaviour, IStoreListener
 
     public bool showPlayNextPageControl
     {
+        get
+        {
+            return playNextPage.gameObject.activeSelf;
+        }
         set
         {
             playNextPage.gameObject.SetActive(value);
@@ -270,6 +415,10 @@ public class BookManager : MonoBehaviour, IStoreListener
 
     public bool showPlayPrevPageControl
     {
+        get
+        {
+            return playPrevPage.gameObject.activeSelf;
+        }
         set
         {
             playPrevPage.gameObject.SetActive(value);
@@ -313,10 +462,7 @@ public class BookManager : MonoBehaviour, IStoreListener
         return PlayerPrefs.GetString("Unlocked") == SystemInfo.deviceUniqueIdentifier;
     }
 
-    public void unlockBook()
-    {
-        myIAPManager.ProcessPurchase(null);        
-    }
+    private const int lockPage = 3;
 
     public void CheckLockUnlockBook()
     {
@@ -326,7 +472,7 @@ public class BookManager : MonoBehaviour, IStoreListener
         } else
         {
             // we aren't unlocked disable lock if <= page 3
-            if (page.page < 3)
+            if (page.page < lockPage)
             {
                 iap.gameObject.SetActive(false);
             } else
@@ -343,7 +489,7 @@ public class BookManager : MonoBehaviour, IStoreListener
     {
         storyAudioSource = gameObject.AddComponent<AudioSource>();
         click = Camera.main.GetComponent<AudioSource>();
-        myIAPManager = new MyIAPManager();
+        myIAPManager = gameObject.AddComponent<MyIAPManager>();
         audioSource = gameObject.AddComponent<AudioSource>();
         var canvasTransform = this.transform;
         playPrevPage = canvasTransform.Find("Prev");
@@ -360,6 +506,11 @@ public class BookManager : MonoBehaviour, IStoreListener
         voiceOn = canvasTransform.Find("VoiceOn");
     }
 
+    public void purchaseBook()
+    {
+        playClick();
+        myIAPManager.PurchaseBook();
+    }
 
     public void registerPage(PageManager childPage)
     {
@@ -396,7 +547,7 @@ public class BookManager : MonoBehaviour, IStoreListener
         {
             float currentTime = 0;
             float start = audioSource.volume;
-            Debug.Log("Fading clip " + audioSource.clip.name);
+            //Debug.Log("Fading clip " + audioSource.clip.name);
             while (currentTime < duration && audioSource.isPlaying)
             {
                 currentTime += Time.deltaTime;
@@ -412,7 +563,7 @@ public class BookManager : MonoBehaviour, IStoreListener
         {
             audioSource.volume = 1;
             audioSource.clip = nextClipToPlayAfterFadeCompleted;
-            Debug.Log("Playing next clip " + nextClipToPlayAfterFadeCompleted.name);
+            //Debug.Log("Playing next clip " + nextClipToPlayAfterFadeCompleted.name);
             audioSource.Play();
         }
         //yield break;

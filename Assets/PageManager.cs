@@ -34,11 +34,13 @@ public class PageManager : MonoBehaviour
     
     
 
-    const float maxScale = 2f;
+    public const float maxScale = 2f;
     const float minScale = 1.125f;
     const float moveDampener = 10f;
-    private Vector3 bottomLeft = new Vector3(960f * (maxScale - 1f), 418f * (maxScale - 1f), 1f); // was 540
-    private Vector3 topRight = new Vector3(-960f * (maxScale - 1f), -418f * (maxScale - 1f), 1f);
+    public const float xBoundary = 960f;
+    public const float yBoundary = 418f;
+    private Vector3 bottomLeft = new Vector3(xBoundary * (maxScale - 1f), yBoundary * (maxScale - 1f), 1f); // was 540
+    private Vector3 topRight = new Vector3(-xBoundary * (maxScale - 1f), -yBoundary * (maxScale - 1f), 1f);
     private bool zooming = false;
     
     private float zoomStart;
@@ -48,7 +50,7 @@ public class PageManager : MonoBehaviour
     // zoom related
     private float currentScale = minScale;
 
-    public Vector3 zoomedInInitialTarget = new Vector3(600, 318, 0);
+public Vector3 zoomedInInitialTarget = new Vector3(600, 318, 0);
     private Vector3 currentLocalPosition;
     private Vector3 endLocalPosition = new Vector3(0, 0, 0);
     private Vector3 startLocalPosition = new Vector3(0, 0, 0);
@@ -67,23 +69,24 @@ public class PageManager : MonoBehaviour
     public async void checkToChangeStoryVoiceClipAndLanguageText()
     {
         AudioClip clip = getStoryClip();
+        
         if (!book.isVoiceOn)
         {
             clip = null;
         }
         if (clip != storyAudioSource.clip)
         {
-            Debug.Log("check1 " + (clip ? clip.name : "null"));
+            //Debug.Log("check1 " + (clip ? clip.name : "null"));
             await book.FadeAndPlayNext(storyAudioSource, clip); //StartCoroutine(book.FadeAndPlayNext(storyAudioSource, clip));
         } else
         {
             if (!storyAudioSource.isPlaying && book.isVoiceOn)
             {
-                Debug.Log("check2 " + (clip ? clip.name : "null"));
+                //Debug.Log("check2 " + (clip ? clip.name : "null"));
                 await book.FadeAndPlayNext(storyAudioSource, clip); //StartCoroutine(book.FadeAndPlayNext(storyAudioSource, clip));
             } else
             {
-                Debug.Log("checkToChangeStoryVoice is same as audio " + (clip ? "has clip" : "null"));
+                //Debug.Log("checkToChangeStoryVoice is same as audio " + (clip ? "has clip" : "null"));
             }
             
         }
@@ -113,14 +116,14 @@ public class PageManager : MonoBehaviour
         {
             if (background && !background.isPlaying)
             {
-                Debug.Log("Playing background for page " + page);
+                //Debug.Log("Playing background for page " + page);
                 background.Play();
             }
         } else
         {
             if (background && background.isPlaying)
             {
-                Debug.Log("Stopping background for page " + page);
+                //Debug.Log("Stopping background for page " + page);
                 background.Stop();
             }
         }
@@ -159,13 +162,13 @@ public class PageManager : MonoBehaviour
         }
     }
 
-    private void instantZoomOut()
+    public void instantZoomOut()
     {
         currentScale = minScale;
         currentLocalPosition = new Vector3(0,0,0);
     }
 
-    private void instantZoomIn()
+    public void instantZoomIn()
     {
         currentScale = maxScale;
         currentLocalPosition = zoomedInInitialTarget;
@@ -232,7 +235,7 @@ public class PageManager : MonoBehaviour
 
         if (storyAudioSource && storyAudioSource.isPlaying && storyAudioSource.clip == story)
         {
-            Debug.Log("check3 " + (storyAudioSource.clip ? storyAudioSource.clip.name : "null"));
+            //Debug.Log("check3 " + (storyAudioSource.clip ? storyAudioSource.clip.name : "null"));
             await book.FadeAndPlayNext(storyAudioSource, null); // StartCoroutine(book.FadeAndPlayNext(storyAudioSource, null));
         }
         
@@ -246,14 +249,20 @@ public class PageManager : MonoBehaviour
             story = null;
         }
     }
+    private bool foundVoiceClip = false;
     public AudioClip getStoryClip()
     {
         string path = "voice/" + book.languageName + "/Page" + page;
         story = Resources.Load(path) as AudioClip;
         if (!story)
         {
-            Debug.Log("Failed to get story " + path);
+            foundVoiceClip = false;
+            Debug.Log("No story for language " + path);
+        } else
+        {
+            foundVoiceClip = true;
         }
+        book.showVoiceControl = allowVoice && foundVoiceClip;
         return story;
     }
     public void PlayPage()
@@ -262,17 +271,16 @@ public class PageManager : MonoBehaviour
         {
             if (book.isMusicOn)
             {
-                Debug.Log("Playing background for page " + page);
+                //Debug.Log("Playing background for page " + page);
                 background.Play();
             } else
             {
-                Debug.Log("Stopping background for page " + page);
+                //Debug.Log("Stopping background for page " + page);
                 background.Stop();
             }
         }
         checkToChangeStoryVoiceClipAndLanguageText();
 
-        book.showVoiceControl = allowVoice;
         book.showLyricControl = allowLyrics;
         book.showZoomControl = allowZoomIn;
         if (book.isZoomedIn && !allowZoomIn)
@@ -290,6 +298,9 @@ public class PageManager : MonoBehaviour
     private RectTransform panelToUse;
     private Vector2 onScreenPanelPos;
     private Vector2 offScreenPanelPos;
+
+    public bool hasTopPanel = false;
+    public bool hasBottomPanel = false;
     
     void Awake()
     {
@@ -301,6 +312,7 @@ public class PageManager : MonoBehaviour
         Transform top = parent.Find("TopPanel");
         if (top)
         {
+            hasTopPanel = true;
             topPanel = top.GetComponent<RectTransform>();
             onScreenPanelPos = new Vector2(topPanel.anchoredPosition.x, topPanel.anchoredPosition.y);
             offScreenPanelPos = onScreenPanelPos + new Vector2(0, 500f);
@@ -311,6 +323,7 @@ public class PageManager : MonoBehaviour
             Transform bottom = parent.Find("BottomPanel");
             if (bottom)
             {
+                hasBottomPanel = true;
                 bottomPanel = bottom.GetComponent<RectTransform>();
                 onScreenPanelPos = new Vector2(bottomPanel.anchoredPosition.x, bottomPanel.anchoredPosition.y);
                 offScreenPanelPos = onScreenPanelPos + new Vector2(0, -500f);

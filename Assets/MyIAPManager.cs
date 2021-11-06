@@ -3,16 +3,17 @@ using UnityEngine.Purchasing;
 using PaperPlaneTools;
 
 
-public class MyIAPManager : IStoreListener
+public class MyIAPManager : MonoBehaviour, IStoreListener
 {
     private static string unlockBookID = "unlock_full_book";
 
     private IStoreController controller;
     private IExtensionProvider extensions;
+    private BookManager bookManager;
 
-
-    public MyIAPManager()
+    void Start()
     {
+        bookManager = gameObject.GetComponentInChildren<BookManager>();
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         builder.AddProduct(unlockBookID, ProductType.NonConsumable);
 
@@ -21,7 +22,7 @@ public class MyIAPManager : IStoreListener
 
     public void PurchaseBook()
     {
-        Debug.LogWarning("Purchasing book...");
+        //Debug.LogWarning("Purchasing book...");
         // If Purchasing has been initialized ...
         if (controller != null && extensions != null)
         {
@@ -32,7 +33,7 @@ public class MyIAPManager : IStoreListener
             // If the look up found a product for this device's store and that product is ready to be sold ... 
             if (product != null && product.availableToPurchase)
             {
-                Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
+                //Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
                 // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed 
                 // asynchronously.
                 controller.InitiatePurchase(product);
@@ -40,13 +41,15 @@ public class MyIAPManager : IStoreListener
             // Otherwise ...
             else
             {
-                new Alert("Error", "Product Not Available");
+                Alert alert = new Alert("Error", "Product Not Available");
+                alert.Show();
             }
         }
         // Otherwise ...
         else
         {
-            new Alert("Error", "Failed to initialise In App Purchases");
+            Alert alert = new Alert("Error", "Failed to initialise In App Purchases. Is your internet on?");
+            alert.Show();
         }
     }
 
@@ -55,7 +58,7 @@ public class MyIAPManager : IStoreListener
     /// </summary>
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
-        Debug.LogWarning("IAP Initialised");
+        //Debug.LogWarning("IAP Initialised");
         this.controller = controller;
         this.extensions = extensions;
     }
@@ -78,8 +81,10 @@ public class MyIAPManager : IStoreListener
     /// </summary>
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e)
     {
-        Debug.LogWarning("Purchase Processed Book Unlocked");
+        //Debug.LogWarning("Purchase Processed Book Unlocked");
         PlayerPrefs.SetString("Unlocked", SystemInfo.deviceUniqueIdentifier);
+        bookManager.CheckLockUnlockBook();
+        
         return PurchaseProcessingResult.Complete;
     }
 
@@ -88,6 +93,7 @@ public class MyIAPManager : IStoreListener
     /// </summary>
     public void OnPurchaseFailed(Product i, PurchaseFailureReason p)
     {
+        
         string reason = "Unknown Error";
         string title = "Unlock Purchase Failure";
         switch (p)
@@ -120,6 +126,7 @@ public class MyIAPManager : IStoreListener
                 break;
         }
         Alert a = new PaperPlaneTools.Alert(title, reason);
+        Debug.LogError("Failed to purchase " + title + " " + reason);
         a.Show();
     }
 }

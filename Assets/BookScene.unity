@@ -486,7 +486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: af5c7c6f125b04bbdb7d6d0252e57f3b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b2edf341f831422c88ea0b83b446f88, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -768,12 +768,18 @@ MonoBehaviour:
   - "El r\xEDo fluye desde mi trono de gracia, Para cada criatura, naci\xF3n y raza.
     Las hojas dan fuerza, energ\xEDa y sanaci\xF3n, mientras que los frutos son refrescos
     y abundantes."
+  - "S\xF4ng ph\u01B0\u1EDBc \xE2n, ngai v\xE0ng d\u1EABn l\u1ED1i<br>G\u1EEDi cho
+    mu\xF4n v\u1EADt, mu\xF4n lo\xE0i<br>L\xE1 cho quy\u1EC1n n\u0103ng, s\u1EE9c
+    m\u1EA1nh v\xE0 ph\u01B0\u1EDBc l\xE0nh<br>V\xE0 c\xE2y tr\xE1i mang \u0111\u1EBFn
+    \u0111\u1ED5i d\u1EDDi \u0111ong \u0111\u1EA7y"
   page: 4
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 69783beae21864b368cbce1a2387b86d, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &378938992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1087,7 @@ RectTransform:
   - {fileID: 196848896}
   - {fileID: 1071643216}
   - {fileID: 573310357}
+  - {fileID: 481859921}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1115,6 +1122,141 @@ MonoBehaviour:
   advertisingPageIndex: 5
   storyAudioSource: {fileID: 0}
   _enablePerPlacementMode: 1
+--- !u!1 &481859920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 481859921}
+  - component: {fileID: 481859925}
+  - component: {fileID: 481859924}
+  - component: {fileID: 481859923}
+  - component: {fileID: 481859922}
+  m_Layer: 6
+  m_Name: Vietnamese
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &481859921
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481859920}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 459267760}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 75, y: -230}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &481859922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481859920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a8f2b9f020d45069575b0f9c30e59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageIndex: 2
+  welcomeToMyLanguage: {fileID: 0}
+--- !u!114 &481859923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481859920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.96941197, b: 0, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 481859924}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &481859924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481859920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 43beeb28968654433ae7e57eee647599, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 1
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &481859925
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481859920}
+  m_CullTransparentMesh: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,7 +1774,6 @@ GameObject:
   - component: {fileID: 573310362}
   - component: {fileID: 573310361}
   - component: {fileID: 573310360}
-  - component: {fileID: 573310358}
   m_Layer: 6
   m_Name: iap
   m_TagString: Untagged
@@ -1659,54 +1800,6 @@ RectTransform:
   m_AnchoredPosition: {x: -58, y: 10}
   m_SizeDelta: {x: 90, y: 80}
   m_Pivot: {x: 1, y: 0}
---- !u!114 &573310358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573310356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productId: unlock_full_book
-  buttonType: 0
-  consumePurchase: 1
-  onPurchaseComplete:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 459267762}
-        m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
-        m_MethodName: unlockBook
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-  onPurchaseFailed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 459267762}
-        m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
-        m_MethodName: OnPurchaseFailed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-  titleText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  priceText: {fileID: 0}
 --- !u!114 &573310360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1753,7 +1846,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 459267762}
         m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
-        m_MethodName: playClick
+        m_MethodName: purchaseBook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2453,6 +2546,8 @@ MonoBehaviour:
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 4c3a19e5827e440f89c5299e2c4b102f, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &735950285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2766,12 +2861,19 @@ MonoBehaviour:
   - "Ven a viajar conmigo en una aventura qui tomaremos. Volaremos por los cielos
     y\_deslizaremos sobre lagos, comeremos mucha fruta y beberemos aqua dulce. Luego
     correr por los cielos\_ y descansar en una flor."
+  - "Tham gia c\xF9ng ta m\u1ED9t chuy\u1EBFn phi\xEAu l\u01B0u,<br>V\xFAt l\xEAn
+    xanh ng\xE0n c\xF5i thi\xEAn thai, l\u01B0\u1EDBt tr\xEAn m\u1EB7t h\u1ED3 t\u0129nh
+    l\u1EB7ng<br>\u0103n th\u1EADt nhi\u1EC1u tr\xE1i m\u1ECDng, u\u1ED1ng d\xF2ng
+    n\u01B0\u1EDBc ng\u1ECDt l\xE0nh<br>Ng\u01B0\u1EE3c xu\xF4i qua N\u01B0\u1EDBc
+    Tr\u1EDDi v\xE0 ngh\u1EC9 ng\u01A1i tr\xEAn hoa"
   page: 9
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: db228f41011fd463a842f252c032399c, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &826006668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2994,12 +3096,18 @@ MonoBehaviour:
   - "Bienvenidos a mi mundo de hielo y nieve, Aqu\xED hay un secreto que no sabras.
     Si haces mu\xF1ecos de nieve y \xC1ngeles tambi\xE9n, Pronto descubrir\xE1s que
     no hace fr\xEDo para ti"
+  - "Th\u1EBF gi\u1EDBi b\u0103ng tuy\u1EBFt xin ch\xE0o m\u1EEBng<br>N\u01A1i \u0111\xE2y
+    c\xF3 m\u1ED9t b\xED m\u1EADt con kh\xF4ng hay<br>L\xE0m ra ng\u01B0\u1EDDi tuy\u1EBFt
+    v\xE0 thi\xEAn th\u1EA7n<br>S\u1EDBm con s\u1EBD ch\u1EB3ng c\xF2n th\u1EA5y
+    gi\xE1 b\u0103ng"
   page: 1
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 6a25d6d4296a64f6b9535d76d94ad62c, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!1 &889274157
 GameObject:
   m_ObjectHideFlags: 0
@@ -3462,12 +3570,18 @@ MonoBehaviour:
   - "Puedes atravesar una cascada o pararte en un puente Sum\xE9rgete en el rio o
     vuela desde una cresta. El cielo est\xE1 lleno de mucha diversi\xF3n, creado
     con amor para todos."
+  - "B\u0103ng qua th\xE1c n\u01B0\u1EDBc ch\u1EA3y<br>hay \u0111\u1EE9ng tr\xEAn
+    c\u1EA7u cao<br>Tr\u1EA7m m\xECnh xu\u1ED1ng s\xF4ng s\xE2u<br>hay qu\u0103ng
+    m\xECnh kh\u1ECFi s\u01A1n t\xEDch<br>Thi\xEAn \u0110\u01B0\u1EDDng tr\xE0n ng\u1EADp
+    vui th\xEDch<br>V\xEC y\xEAu T\u1ECDa H\xF3a c\u1ED9i sinh th\xE0nh"
   page: 3
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: a1116254676ab4c4b96f5a0e3e9eae2e, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &1065772709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3831,12 +3945,18 @@ MonoBehaviour:
   - "Escuchar y ver el tintineo de las campanas, de las hermosas flores  y \xE1rboles
     tambi\xE9n.\_ Cada uno \xFAnico en su canci\xF3n de alabanza, que fluye en color
     al trono del Se\xF1or de la gracia."
+  - "H\xE3y nghe v\xE0 ng\u1EAFm<br>ti\u1EBFng chu\xF4ng vang ng\xE2n<br>T\u1EEB
+    n\u1EE5 hoa t\u01B0\u01A1i th\u1EAFm<br>\u0111\u1EBFn l\u1EAFm ng\u1EA7n c\u1ECF
+    c\xE2y<br>Thanh s\u1EA3ng ng\u1EE3i ca, v\xF4 song tr\u1ECDn ph\u01B0\u1EDBc,<br>T\xF4
+    l\xEAn mu\xF4n s\u1EAFc ngai v\xE0ng Ch\xFAa oai nghi"
   page: 6
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: bfd125ed708844aedbe76c198cbed5a0, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &1114806377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4045,12 +4165,19 @@ MonoBehaviour:
   - "Hola, soy Torrah, vivo en el mar. Puede respirar bajo el agua Y hacer un picnic
     conmigo. Ven a conocer nuevos peces y visita justo abajo, Te sorprender\xE1s
     mientras miras a tu alrededor en maravilla."
+  - "Xin ch\xE0o, t\xF4i t\xEAn Torrah, t\xF4i s\u1ED1ng n\u01A1i bi\u1EC3n xanh<br>B\u1EA1n
+    c\xF3 th\u1EC3 th\u1EDF d\u01B0\u1EDBi n\u01B0\u1EDBc<br>C\xF9ng t\xF4i tham
+    gia chuy\u1EBFn gi\xE3 ngo\u1EA1i<br>G\u1EB7p g\u1EE1 b\u1EA1n c\xE1 m\u1EDBi
+    v\xE0 tham quan n\u01A1i th\u1EB3m s\xE2u<br>C\xE0ng \u0111i b\u1EA1n s\u1EBD
+    c\xE0ng cho\xE1ng ng\u1EE3p<br>b\u1EDFi khung c\u1EA3nh n\u01A1i \u0111\xE2y"
   page: 5
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 0686ad56f2b2640168f0b44e2fb230c2, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &1188310141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4146,12 +4273,19 @@ MonoBehaviour:
   - "Ven comuni\xF3n con nosotras mientras caminamos por el lago, Hablemos de tu
     d\xEDa desde el momento en que despiertas.\_ Cu\xE9ntame tus deseos, planes y
     sue\xF1os,\_ y estar rodeado de nuestro amor, alegr\xEDa y paz."
+  - "\u0110\u1EBFn \u0111\xE2y t\u01B0\u01A1ng giao v\u1EDBi Ch\xFAng Ta<br>c\xF9ng
+    nhau d\u1EA1o b\u01B0\u1EDBc d\u1ECDc b\u1EDD h\u1ED3<br>Gi\xE3i b\xE0y v\u1EC1
+    ng\xE0y c\u1EE7a con,<br>t\u1EEB kho\u1EA3nh kh\u1EAFc con th\u1EE9c gi\u1EA5c<br>K\u1EC3
+    ta nghe, m\u1ECDi \u0111i\u1EC1u con mong \u01B0\u1EDBc,<br>v\xE0 \u0111\u01B0\u1EE3c
+    v\xE2y quanh b\u1EDFi t\xECnh y\xEAu v\xE0 ni\u1EC1m vui s\u01B0\u1EDBng."
   page: 8
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 63c6a845c6a5a4a8b907534ad24ec6eb, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &1237086392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4454,12 +4588,19 @@ MonoBehaviour:
   - "Esta es la ciudad que nos encanta que veas, la gente aqu\xED es parte de M\xED.
     Para vivir aqu\xED tienes que ser fiel, gentil y amable,  a todas mis criaturas
     y a toda la humanidad."
+  - "Ta mu\u1ED1n con chi\xEAm ng\u01B0\u1EE1ng, th\xE0nh tr\xEC n\u01A1i ta ng\u1EF1<br>M\u1ED9t
+    ph\u1EA7n c\u1EE7a ta, nh\xE2n sinh ng\u1EE5 n\u01A1i \u0111\xE2y<br>N\u1EBFu
+    mu\u1ED1n d\u1EEBng ch\xE2n ch\u1ED1n n\xE0y,<br>\u1EA4y l\xE0 k\u1EBB hi\u1EC1n
+    l\xE0nh. trung t\xEDn, nh\xE2n t\u1EEB<br>G\u1EEDi \u0111\u1EBFn mu\xF4n lo\xE0i,
+    c\xF9ng v\u1EA1n v\u1EADt nh\xE2n sinh."
   page: 7
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: fd5fd3986a9d94958bd4001fd931782d, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &1391572175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4839,12 +4980,17 @@ MonoBehaviour:
     to such as you.
   - "Re\xFAnanse mientras les cuento una history, de nuestro Dios, su amor, su reino
     y Gloria. Su amor es perfecto, Hermoso y verdadero, y su reino pertenece a ustedes."
+  - "Ng\u1ED3i xu\u1ED1ng \u0111\xE2y nghe ta k\u1EC3<br>N\u01A1i thi\xEAn \u0111\xE0ng
+    huy ho\xE0ng Ch\xFAa S\u1ED1ng<br>T\xECnh Ng\xE0i ch\xE2n l\xFD mu\xF4n \u0111\u1EDDi<br>N\u01A1i
+    Ch\xFAa s\u1EA5m s\u1EB5n mu\xF4n v\xE0n m\u1EBFn y\xEAu"
   page: 2
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: dfe6115182e104197b9c59996008a015, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &1515068681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5617,12 +5763,18 @@ MonoBehaviour:
   - "Te amo, hijo m\xEDo, te amo, lo hago, y durante toda tu vida all\xED estar\xE9
     contigo, Aunque los problemas pueden venir y decepciones tambi\xE9n, Te amo,
     hijo m\xEDo, y te llevar\xE9 adelante."
+  - "Ta y\xEAu con, m\xE3i tr\xE0n t\xECnh y\xEAu Ta<br>v\xE0 trong su\u1ED1t ch\u1EB7ng
+    \u0111\u01B0\u1EDDng, c\xF3 ta k\u1EC1 c\u1EADn b\xEAn<br>\u0110i qua nh\u1EEFng
+    ho\u1EA1n n\u1EA1n, c\xF9ng u phi\u1EC1n tri\u1EC1n mi\xEAn<br>Ta v\u1EABn s\u1EBD
+    y\xEAu con v\xE0 soi \u0111\u01B0\u1EDDng d\u1EABn l\u1ED1i."
   page: 10
   allowZoomIn: 1
   allowLyrics: 1
   allowVoice: 1
   backgroundMusic: {fileID: 8300000, guid: 1967cace94c564c22af230bf20489bce, type: 3}
   zoomedInInitialTarget: {x: 600, y: 318, z: 0}
+  hasTopPanel: 0
+  hasBottomPanel: 0
 --- !u!114 &1857354613
 MonoBehaviour:
   m_ObjectHideFlags: 0
